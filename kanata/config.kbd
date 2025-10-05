@@ -1,0 +1,109 @@
+;; defsrc is still necessary
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+       lmet lalt           spc                 rmet rctl
+)
+
+(defvar
+  tap-time 150
+  hold-time 200
+)
+
+(defalias
+  caps esc
+  escctrl (tap-hold 100 100 esc lctl)
+
+  ;; homerow mods
+;;  a (tap-hold $tap-time $hold-time a lmet)
+;;  s (tap-hold $tap-time $hold-time s lalt)
+;;  d (tap-hold $tap-time $hold-time d lsft)
+;;  f (tap-hold $tap-time $hold-time f lctl)
+;;  j (tap-hold $tap-time $hold-time j rctl)
+;;  k (tap-hold $tap-time $hold-time k rsft)
+;;  l (tap-hold $tap-time $hold-time l ralt)
+;;  ; (tap-hold $tap-time $hold-time ; rmet)
+
+  a (multi f24 (tap-hold $tap-time $hold-time a lmet))
+  s (multi f24 (tap-hold $tap-time $hold-time s lalt))
+  d (multi f24 (tap-hold $tap-time $hold-time d lsft))
+  f (multi f24 (tap-hold $tap-time $hold-time f lctl))
+  j (multi f24 (tap-hold $tap-time $hold-time j rctl))
+  k (multi f24 (tap-hold $tap-time $hold-time k rsft))
+  l (multi f24 (tap-hold $tap-time $hold-time l ralt))
+  ; (multi f24 (tap-hold $tap-time $hold-time ; rmet))
+
+  ;; layer
+  c (multi f24 (tap-hold $tap-time $hold-time c (layer-while-held nums)))
+  m (multi f24 (tap-hold $tap-time $hold-time m (layer-while-held nums)))
+  v (multi f24 (tap-hold $tap-time $hold-time v (layer-while-held jump)))
+  n (multi f24 (tap-hold $tap-time $hold-time n (layer-while-held spc)))
+  z (multi f24 (tap-hold $tap-time $hold-time z (layer-while-held jump)))
+  x (multi f24 (tap-hold $tap-time $hold-time x (layer-while-held move)))
+)
+
+(deflayer base
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    @y    u    i    o    p    [    ]    \
+  @caps @a  @s   @d   @f    g    h   @j   @k   @l   @;    '    ret
+  lsft @z    @x   @c    @v    b    @n   @m    ,    .    /    rsft
+       lmet lalt           spc                 rmet rctl
+)
+
+(deflayer nums
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  @us    -    =    @pl    bspc    y    1    4    7    p    [    ]    \
+  @caps @lrp    @rrp @lcb @rcb    ret    S-4    2    5    8    0    '    ret
+    lsft @hs    @star   S-8    @and    b    n    3    6    9    /    rsft
+       lmet lalt           spc                 rmet rctl
+)
+
+(deflayer spc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    @ue    i    @oe    p    [    ]    \
+  caps @ae    @sz    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+       lmet lalt           spc                 rmet rctl
+)
+
+(deflayer jump
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    M-9    M-0    o   p    [    ]    \
+  caps a   s    d    f    g     M-1  M-2  M-3  M-4  M-5  '    ret
+  lsft z    x    c    v    b  M-6   M-7   M-8  .  /    rsft
+       lmet lalt           spc                 rmet rctl
+)
+
+(deflayer move 
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    @y    M-S-9    M-S-0    o    p    [    ]    \
+  caps a   s    d    f    g    M-S-1    M-S-2    M-S-3   M-S-4 M-S-5    '    ret
+  lsft z    x    c    v    b  M-S-6   M-S-7   M-S-8   .  /    rsft
+       lmet lalt           spc                 rmet rctl
+)
+
+
+(defalias
+  y y
+  oe RA-p 
+  ae RA-q 
+  ue RA-y 
+  sz RA-s 
+
+  and S-7
+  star S-8 
+  hs S-2
+  rcb S-] 
+  lcb S-[ 
+  lrp S-9
+  rrp S-0
+  us S--
+  pl S-=
+
+)
