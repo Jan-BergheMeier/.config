@@ -20,15 +20,6 @@
   caps esc
   escctrl (tap-hold 100 100 esc lctl)
 
-  ;; homerow mods
-;;  a (tap-hold $tap-time $hold-time a lmet)
-;;  s (tap-hold $tap-time $hold-time s lalt)
-;;  d (tap-hold $tap-time $hold-time d lsft)
-;;  f (tap-hold $tap-time $hold-time f lctl)
-;;  j (tap-hold $tap-time $hold-time j rctl)
-;;  k (tap-hold $tap-time $hold-time k rsft)
-;;  l (tap-hold $tap-time $hold-time l ralt)
-;;  ; (tap-hold $tap-time $hold-time ; rmet)
 
   a (multi f24 (tap-hold $tap-time $hold-time a lmet))
   s (multi f24 (tap-hold $tap-time $hold-time s lalt))
@@ -46,11 +37,12 @@
   n (multi f24 (tap-hold $tap-time $hold-time n (layer-while-held spc)))
   z (multi f24 (tap-hold $tap-time $hold-time z (layer-while-held jump)))
   x (multi f24 (tap-hold $tap-time $hold-time x (layer-while-held move)))
+  w (multi f24 (tap-hold $tap-time $hold-time w (layer-while-held arrow)))
 )
 
 (deflayer base
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    @y    u    i    o    p    [    ]    \
+  tab  q    @w    e    r    t    @y    u    i    o    p    [    ]    \
   @caps @a  @s   @d   @f    g    h   @j   @k   @l   @;    '    ret
   lsft @z    @x   @c    @v    b    @n   @m    ,    .    /    rsft
        lmet lalt           spc                 rmet rctl
@@ -74,7 +66,7 @@
 
 (deflayer jump
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    M-9    M-0    o   p    [    ]    \
+  tab  q    w    e    r    t    y    M-u    M-i    M-o   M-p    [    ]    \
   caps a   s    d    f    g     M-1  M-2  M-3  M-4  M-5  '    ret
   lsft z    x    c    v    b  M-6   M-7   M-8  .  /    rsft
        lmet lalt           spc                 rmet rctl
@@ -87,6 +79,15 @@
   lsft z    x    c    v    b  M-S-6   M-S-7   M-S-8   .  /    rsft
        lmet lalt           spc                 rmet rctl
 )
+
+(deflayer arrow
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    lsft    lctl    g    left  down up right    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+       lmet lalt           spc                 rmet rctl
+)
+
 
 
 (defalias
