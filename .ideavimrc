@@ -1,0 +1,178 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" Do incremental searching.
+set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+let mapleader = " "
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  """   We recommend updating the parsers on update
+
+Plug 'preservim/nerdtree'
+
+Plug 'tpope/vim-surround'
+
+" set nerdtree
+" set functiontextobj
+
+map <leader>rr <Action>(IdeaVim.ReloadVimRc.reload)
+
+" set peekaboo
+
+nmap s <Action>(flash.search)
+nmap S <Action>(flash.treesitter)
+xmap s <Action>(flash.search)
+
+" enhance vim f (find for char in characters to the right of the current cursor)
+nmap f <Action>(flash.find)
+xmap f <Action>(flash.find)
+" enhance vim F (find for char in characters to the left of the current cursor)
+nmap F <Action>(flash.find_backward)
+xmap F <Action>(flash.find_backward)
+" enhance vim t (till for char in characters to the right of the current cursor)
+nmap t <Action>(flash.till)
+xmap t <Action>(flash.till)
+" enhance vim T (till for char in characters to the left of the current cursor)
+nmap T <Action>(flash.till_backward)
+xmap T <Action>(flash.till_backward)
+" enhance vim ; (Repeat the last f/F/t/T search)
+" map ' <Action>(flash.repeat)
+" nmap ' <Action>(flash.repeat)
+" xmap ' <Action>(flash.repeat)
+" enhance vim , (Repeat the last f/F/t/T search backward)
+map , <Action>(flash.repeat_backward)
+" nmap , <Action>(flash.repeat_backward)
+" xmap , <Action>(flash.repeat_backward)
+
+omap r <Action>(flash.remote)
+
+" Tabs
+map <leader>l <C-w>l
+map <leader>h <C-w>h
+map <leader>fl <Action>(TabShiftActions.ShiftRight)
+map <leader>fh <Action>(TabShiftActions.ShiftLeft)
+map <A-l> <Action>(TabShiftActions.StretchRight)
+map <A-h> <Action>(TabShiftActions.StretchLeft)
+map <C-w>u <Action>(Unsplit)
+
+map <C-q> <Action>(CloseContent)
+map <leader><C-q> <Action>(ReopenClosedTab)
+
+nmap :a :action GotoHarpoon1<cr>
+nmap :s :action GotoHarpoon2<cr>
+nmap :d :action GotoHarpoon3<cr>
+nmap :f :action GotoHarpoon4<cr>
+
+nmap :j :action GotoHarpoon5<cr>
+nmap :k :action GotoHarpoon6<cr>
+nmap :l :action GotoHarpoon7<cr>
+nmap :; :action GotoHarpoon8<cr>
+
+nmap <leader>sa :action SetHarpoon1<cr>
+nmap <leader>ss :action SetHarpoon2<cr>
+nmap <leader>sd :action SetHarpoon3<cr>
+nmap <leader>sf :action jetHarpoon4<cr>
+
+nmap <leader>sj :action SetHarpoon5<cr>
+nmap <leader>sk :action SetHarpoon6<cr>
+nmap <leader>sl :action SetHarpoon7<cr>
+nmap <leader>s; :action SetHarpoon8<cr>
+
+nmap <leader><C-e> :action ShowHarpoon<cr>
+nmap <leader>a :action AddToHarpoon<cr>
+
+" Bookmarks
+nmap ma :action ToggleBookmarkA<cr>
+nmap ms :action ToggleBookmarkS<cr>
+nmap md :action ToggleBookmarkD<cr>
+nmap mf :action ToggleBookmarkF<cr>
+
+nmap mj :action ToggleBookmarkJ<cr>
+nmap mk :action ToggleBookmarkK<cr>
+nmap ml :action ToggleBookmarkL<cr>
+nmap m; :action ToggleBookmarkB<cr>
+
+nmap ;a :action GotoBookmarkA<cr>
+nmap ;s :action GotoBookmarkS<cr>
+nmap ;d :action GotoBookmarkD<cr>
+nmap ;f :action GotoBookmarkF<cr>
+
+nmap ;j :action GotoBookmarkJ<cr>
+nmap ;k :action GotoBookmarkK<cr>
+nmap ;l :action GotoBookmarkL<cr>
+nmap ;; :action GotoBookmarkB<cr>
+
+" remaps
+" map <A-i> bi
+map <A-i> Bi
+
+" map <A-a> ea
+map <A-a> Ea
+
+map grn <action>(RenameElement)
+map g, <action>(JumpToLastChange)
+map g; <action>(JumpToNextChange)
+
+map J <action>(MoveLineDown)
+" map K <action>(MoveLineUp)
+
+nnoremap [ :action MethodUp<CR>
+nnoremap ] :action MethodDown<CR>
+
+nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
+map <Leader>q <action>(ShowHoverInfo)
+
+" Go to
+nnoremap <A-e> :action GotoNextError<CR>
+nnoremap <A-r> :action GotoPreviousError<CR>
+
+nnoremap <leader>jf :action GotoSymbol<CR>
+nnoremap <leader>ji :action GotoFile<CR>
+nnoremap <leader>jj :action SearchEverywhere<CR>
+nnoremap <leader>js :action GotoClass<CR>
+
+nnoremap <C-d> :action Run<CR>
+nnoremap <C-g> :action RunAnything<CR>
+" nnoremap <C-D> :action RunClass<CR>
+
+map <Leader>pf <action>(com.mituuz.fuzzier.Fuzzier)
+map <Leader>mf <action>(com.mituuz.fuzzier.FuzzyMover)
+map <Leader>gf <action>(com.mituuz.fuzzier.FuzzierVCS)
+map <Leader>nf <action>(com.mituuz.fuzzier.FuzzyGrepCaseInsensitive)
+map <leader>rf <action>(ReplaceInPath)
+map <Leader>ni <action>(FindInPath)
+
+sethandler <C-C> n-v:ide i:vim
+" sethandler <C-K> n-v:ide i:vim
+"sethandler <C-J> n-v:ide i:vim
+
+sethandler <A-n> n-v:ide i:vim
+sethandler <A-k> n-v:ide i:vim
+
+nnoremap <leader>w :action EditorSelectWord<CR>
+vnoremap <leader>w <action>(EditorSelectWord)
+
+map <leader>gd <Action>(Git.Branches)
+map <leader>gc <Action>(CheckinProject)
+map <leader>gp <Action>(Vcs.push)
+map <leader>gu <Action>(Git.Update)
+
+nnoremap <C-s> :action ActivateStructureToolWindow<CR>
+nnoremap <C-;> :action ActivateProjectToolWindow<CR>
